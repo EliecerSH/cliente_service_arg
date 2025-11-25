@@ -26,7 +26,9 @@ public class ClientesController {
 
     @GetMapping("{id}")
     public Clientes findById(@PathVariable Integer id){
-        return cliRepo.findById(id).get();
+        return cliRepo.findById(id)
+                .orElseThrow(() -> new RuntimeException("Cliente con ID " + id + " no existe"));
+
     }
 
     @PostMapping
@@ -36,12 +38,26 @@ public class ClientesController {
 
     @DeleteMapping("{id}")
     public void deleteById(@PathVariable Integer id){
+        if (!cliRepo.existsById(id)) {
+            throw new RuntimeException("El cliente con ID " + id + " no existe");
+        }
         cliRepo.deleteById(id);
     }
 
     @PutMapping("{id}")
     public Clientes update(@PathVariable Integer id, @RequestBody Clientes clientes){
-        return cliRepo.save(clientes);
+        return cliRepo.findById(id)
+                .map(cliExistente -> {
+                    cliExistente.setNombre(clientes.getNombre());
+                    cliExistente.setApellido(clientes.getApellido());
+                    cliExistente.setCorreo(clientes.getCorreo());
+                    cliExistente.setClave(clientes.getClave());
+                    cliExistente.setDireccion(clientes.getDireccion());
+                    cliExistente.setTelefono(clientes.getTelefono());
+                    cliExistente.setFecha_registro(clientes.getFecha_registro());
+                    return cliRepo.save(cliExistente);
+                })
+                .orElseThrow(() -> new RuntimeException("Cliente con ID " + id + " no existe"));
     }
 
 }
