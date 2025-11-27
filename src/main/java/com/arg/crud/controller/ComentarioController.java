@@ -28,8 +28,6 @@ public class ComentarioController {
 
     @PostMapping
     public Comentarios save(@RequestBody Comentarios comentario) {
-        // Al crear, el id debe ser 0 o no enviado
-        comentario.setId_comentario(0);
         return repo.save(comentario);
     }
 
