@@ -20,7 +20,7 @@ public class Administradores {
     private LocalDate fecha_creacion;
     private String activo;
 
-    private int getId_admin() {
+    public int getId_admin() {
         return id_admin;
     }
     public void setId_admin(int id_admin) {

@@ -18,7 +18,7 @@ public class Registro_inventario {
     private String usuario;
 
 
-    private int getId_registro() {
+    public int getId_registro() {
         return id_registro;
     }
     public void setId_registro(int id_registro) {

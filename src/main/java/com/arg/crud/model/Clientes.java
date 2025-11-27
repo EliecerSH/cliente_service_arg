@@ -16,7 +16,7 @@ public class Clientes {
     private LocalDate fecha_registro;
 
 
-    private int getId_Cliente(){
+    public int getId_Cliente(){
         return id_cliente;
     }
     public void setId_Cliente(int id_Cliente){
