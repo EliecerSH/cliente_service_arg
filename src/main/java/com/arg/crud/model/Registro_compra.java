@@ -18,7 +18,7 @@ public class Registro_compra {
     private String usuario;
 
 
-    private int getId_registro_compra() {
+    public int getId_registro_compra() {
         return id_registro_compra;
     }
     public void setId_registro_compra(int id_registro_compra) {

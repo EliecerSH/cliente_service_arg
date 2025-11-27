@@ -7,19 +7,13 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-
 @RestController
 @RequestMapping("/api/comentarios")
-@CrossOrigin("*")//permite llamdas desde el froned
+@CrossOrigin("*")
 public class ComentarioController {
 
     @Autowired
     private ComentarioRepository repo;
-
-    public ComentarioRepository getRepo() {
-        return repo;
-    }
-
 
     @GetMapping
     public List<Comentarios> findAll() {
@@ -29,11 +23,13 @@ public class ComentarioController {
     @GetMapping("{id}")
     public Comentarios findById(@PathVariable int id) {
         return repo.findById(id)
-                .orElseThrow(() -> new RuntimeException("El comentario con el ID: "+ id +" no existe"));
+                .orElseThrow(() -> new RuntimeException("El comentario con el ID: " + id + " no existe"));
     }
 
     @PostMapping
     public Comentarios save(@RequestBody Comentarios comentario) {
+        // Al crear, el id debe ser 0 o no enviado
+        comentario.setId_comentario(0);
         return repo.save(comentario);
     }
 
@@ -47,18 +43,16 @@ public class ComentarioController {
 
     @PutMapping("{id}")
     public Comentarios update(@PathVariable int id, @RequestBody Comentarios comentario) {
+
         return repo.findById(id)
-                .map(prodExistente -> {
-
-                    prodExistente.setNombre(comentario.getNombre());
-                    prodExistente.setContenido(comentario.getContenido());
-                    prodExistente.setTematica(comentario.getTematica());
-
-                    return repo.save(prodExistente);
+                .map(existente -> {
+                    existente.setNombre(comentario.getNombre());
+                    existente.setContenido(comentario.getContenido());
+                    existente.setTematica(comentario.getTematica());
+                    return repo.save(existente);
                 })
                 .orElseThrow(() ->
-                        new RuntimeException("El el comentario con ID " + id + " no existe"));
+                        new RuntimeException("El comentario con ID " + id + " no existe"));
     }
-
-
 }
+

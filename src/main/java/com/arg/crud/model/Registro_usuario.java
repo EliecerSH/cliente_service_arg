@@ -18,7 +18,7 @@ public class Registro_usuario {
     private String usuario;
 
 
-    private int getId_registro_usuario() {
+    public int getId_registro_usuario() {
         return id_registro_usuario;
     }
     public void setId_registro_usuario(int id_registro_usuario) {

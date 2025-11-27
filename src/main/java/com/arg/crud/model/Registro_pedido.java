@@ -18,7 +18,7 @@ public class Registro_pedido {
     private String usuario;
 
 
-    private int getId_registro_pedido() {
+    public int getId_registro_pedido() {
         return id_registro_pedido;
     }
     public void setId_registro_pedido(int id_registro_pedido) {
