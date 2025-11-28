@@ -10,8 +10,8 @@ public class Clientes {
     private String nombre;
     private String apellido;
     private String correo;
-    private String clave;
     private String direccion;
+    private String clave;
     private String telefono;
     private LocalDate fecha_registro;
 
