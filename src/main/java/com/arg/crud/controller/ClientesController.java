@@ -51,8 +51,8 @@ public class ClientesController {
                     cliExistente.setNombre(clientes.getNombre());
                     cliExistente.setApellido(clientes.getApellido());
                     cliExistente.setCorreo(clientes.getCorreo());
-                    cliExistente.setClave(clientes.getClave());
                     cliExistente.setDireccion(clientes.getDireccion());
+                    cliExistente.setClave(clientes.getClave());
                     cliExistente.setTelefono(clientes.getTelefono());
                     cliExistente.setFecha_registro(clientes.getFecha_registro());
                     return cliRepo.save(cliExistente);
